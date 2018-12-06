@@ -1,0 +1,104 @@
+---
+networks:
+  localdomain:
+    :address: 192.168.5.0
+machines:
+  puppet:
+    :os: Centos7
+    :cpu: 2
+    :memory: 1024
+    :net:
+      localdomain:
+        :ip: 192.168.5.2
+    :shared:
+      '~/puppetcode': /etc/puppetlabs/code/environments/production
+
+  centos6:
+    :os: Centos6
+    :net:
+      localdomain:
+        :ip: 192.168.5.11
+    :shared:
+      '~/puppetcode': /etc/puppetlabs/code/environments/production
+  centos7:
+    :os: Centos7
+    :net:
+      localdomain:
+        :ip: 192.168.5.12
+    :shared:
+      '~/puppetcode': /etc/puppetlabs/code/environments/production
+    :forwarded:
+      '80': '8080'
+  debian8:
+    :os: Debian8
+    :net:
+      localdomain:
+        :ip: 192.168.5.21
+    :shared:
+      '~/puppetcode': /etc/puppetlabs/code/environments/production
+  debian9:
+    :os: Debian9
+    :net:
+      localdomain:
+        :ip: 192.168.5.22
+    :shared:
+      '~/puppetcode': /etc/puppetlabs/code/environments/production
+  ubuntu16:
+    :os: Ubuntu16
+    :net:
+      localdomain:
+        :ip: 192.168.5.31
+    :shared:
+      '~/puppetcode': /etc/puppetlabs/code/environments/production
+  ubuntu18:
+    :os: Ubuntu18
+    :net:
+      localdomain:
+        :ip: 192.168.5.32
+    :shared:
+      '~/puppetcode': /etc/puppetlabs/code/environments/production
+
+  w10:
+    :os: Windows10
+    :net:
+      localdomain:
+        :ip: 192.168.5.51
+    :shared:
+      '~/puppetcode': /ProgramData/PuppetLabs/code/environments/production
+
+operatingsystems:
+  Centos6:
+    :family: redhat
+    :name: centos
+    :release: 6
+    :box: bento/centos-6
+  Centos7:
+    :family: redhat
+    :name: centos
+    :release: 7
+    :box: bento/centos-7
+  Debian8:
+    :family: debian
+    :name: debian
+    :release: jessie
+    :box: bento/debian-8
+  Debian9:
+    :family: debian
+    :name: debian
+    :release: stretch
+    :box: bento/debian-9
+  Ubuntu16:
+    :family: debian
+    :name: ubuntu
+    :release: xenial
+    :box: bento/ubuntu-16.04
+  Ubuntu18:
+    :family: debian
+    :name: ubuntu
+    :release: bionic
+    :box: bento/ubuntu-18.04
+  Windows10:
+    :family: windows
+    :name: windows10
+    :release: 10
+    :box: jacqinthebox/windows10LTSB

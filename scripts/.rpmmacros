@@ -1,0 +1,4 @@
+%_topdir            %(echo $HOME)/rpmbuild
+%dist               .el7
+%debug_package      %{nil}
+%_gpg_name          lbetz <lennart.betz@netways.de>
