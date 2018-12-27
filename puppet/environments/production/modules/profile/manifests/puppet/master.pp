@@ -5,7 +5,7 @@ class profile::puppet::master {
   #
 
   class { 'puppetdb::database::postgresql':
-    manage_package_repo => false,
+    manage_package_repo => true,
     postgres_version    => '9.6',
     listen_addresses    => '*',
   }
