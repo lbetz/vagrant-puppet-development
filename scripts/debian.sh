@@ -1,9 +1,6 @@
 OS=$1
 RELEASE=$2
 
-PUPPET_VERSION="5.5.7-1"
-PUPPET_PACKAGE="puppet-agent_${PUPPET_VERSION}${RELEASE}_amd64.deb"
-
 function raise_error() {
   echo -e "\e[31mfailed\e[0m"
   exit 1
@@ -24,7 +21,6 @@ apt-get update &>/dev/null || raise_error
 
 echo "Installing Puppet agent..."
 dpkg-query --show puppet-agent &>/dev/null || apt-get -y install puppet-agent &>/dev/null
-#dpkg-query --show puppet-agent &>/dev/null || dpkg -i "/vagrant/downloads/${PUPPET_PACKAGE}" &>/dev/null || raise_error
 
 # structered facts
 echo "Creating facts.d directory..."
