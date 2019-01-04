@@ -17,10 +17,10 @@ module Vagrant
           when "debian"
             vm.provision :shell, :path => 'scripts/debian.sh', :args => [ os[:name], os[:release] ]
           else
-            vm.provision :shell, :path => 'scripts/windows.bat'
+            vm.provision :shell, :path => 'scripts/windows.ps1'
           end
           vm.provision :puppet do |puppet|
-            if os == "Windows"
+            if os[:family] == "windows"
               puppet.environment_path = "puppet/environments.windows"
             else
               puppet.environment_path = "puppet/environments"
@@ -58,17 +58,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.define name do |node|
       # base boxes
+      config.vm.box = options[:os][:box]
       if options[:os][:family] == "windows"
         config.vm.communicator = "winrm"
-        config.ssh.insert_key = false
+        config.ssh.insert_key = true
       else
-        config.vm.box = options[:os][:box]
         config.ssh.forward_agent = true
         config.ssh.insert_key = true
       end
 
       node.vm.hostname = name
-      node.vm.host_name = name + "." + options[:domain] if options[:os][:family] != "Windows"
+      node.vm.host_name = name + "." + options[:domain] if options[:os][:family] != "windows"
 
       if options[:forwarded]
         options[:forwarded].each_pair do |guest, local|

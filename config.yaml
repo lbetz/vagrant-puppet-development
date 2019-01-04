@@ -58,13 +58,24 @@ machines:
     :shared:
       '~/puppetcode': /etc/puppetlabs/code/environments/production
 
-  w10:
-    :os: Windows10
+  w2k12r2:
+    :os: Windows2012r2
+    :cpu: 2
+    :memory: 2048
     :net:
       localdomain:
         :ip: 192.168.5.51
     :shared:
       '~/puppetcode': /ProgramData/PuppetLabs/code/environments/production
+  w2k16:
+    :os: Windows2016
+    :cpu: 2
+    :memory: 2048
+    :net:
+      localdomain:
+        :ip: 192.168.5.52
+    :forwarded:
+      '3389': '53389'
 
 operatingsystems:
   Centos6:
@@ -97,8 +108,13 @@ operatingsystems:
     :name: ubuntu
     :release: bionic
     :box: bento/ubuntu-18.04
-  Windows10:
+  Windows2012r2:
     :family: windows
-    :name: windows10
-    :release: 10
-    :box: jacqinthebox/windows10LTSB
+    :name: windows
+    :release: 2012r2
+    :box: devopsgroup-io/windows_server-2012r2-standard-amd64-nocm
+  Windows2016:
+    :family: windows
+    :name: windows
+    :release: 2016
+    :box: jacqinthebox/windowsserver2016
