@@ -57,6 +57,13 @@ machines:
         :ip: 192.168.5.32
     :shared:
       '~/puppetcode': /etc/puppetlabs/code/environments/production
+  suse12:
+    :os: Suse12
+    :net:
+      localdomain:
+        :ip: 192.168.5.41
+    :shared:
+      '~/puppetcode': /etc/puppetlabs/code/environments/production
 
   w2k12r2:
     :os: Windows2012r2
@@ -65,8 +72,6 @@ machines:
     :net:
       localdomain:
         :ip: 192.168.5.51
-    :shared:
-      '~/puppetcode': /ProgramData/PuppetLabs/code/environments/production
   w2k16:
     :os: Windows2016
     :cpu: 2
@@ -76,6 +81,14 @@ machines:
         :ip: 192.168.5.52
     :forwarded:
       '3389': '53389'
+  w10:
+    :os: Windows10
+    :memory: 1024
+    :net:
+      localdomain:
+        :ip: 192.168.5.53
+    :shared:
+      '~/puppetcode': C:/puppetcode
 
 operatingsystems:
   Centos6:
@@ -108,6 +121,11 @@ operatingsystems:
     :name: ubuntu
     :release: bionic
     :box: bento/ubuntu-18.04
+  Suse12:
+    :family: suse
+    :name: suse
+    :release: 12
+    :box: bento/opensuse-leap-42
   Windows2012r2:
     :family: windows
     :name: windows
@@ -118,3 +136,8 @@ operatingsystems:
     :name: windows
     :release: 2016
     :box: jacqinthebox/windowsserver2016
+  Windows10:
+    :family: windows
+    :name: windows
+    :release: 10
+    :box: jacqinthebox/windows10LTSB

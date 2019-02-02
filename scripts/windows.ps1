@@ -2,9 +2,8 @@
 # from the master's pe_repo by downloading it to C:\tmp first and then running
 # msiexec on it from there.
 
-$puppet_master_server = "master.example.com"
-$msi_source = "https://downloads.puppetlabs.com/windows/puppet5/puppet-agent-5.5.8-x64.msi"
-$msi_dest = "C:\tmp\puppet-agent-5.5.8-x64.msi"
+$msi_source = "https://downloads.puppetlabs.com/windows/puppet5/puppet-agent-x64-latest.msi"
+$msi_dest = "C:\tmp\puppet-agent-x64-latest.msi"
 
 # Start the agent installation process and wait for it to end before continuing.
 Write-Host "Installing puppet agent from $msi_source"

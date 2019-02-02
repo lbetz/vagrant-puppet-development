@@ -16,13 +16,16 @@ module Vagrant
             vm.provision :shell, :path => 'scripts/redhat.sh', :args => [ os[:name], os[:release] ]
           when "debian"
             vm.provision :shell, :path => 'scripts/debian.sh', :args => [ os[:name], os[:release] ]
-          else
+          when "suse"
+            vm.provision :shell, :path => 'scripts/suse.sh', :args => [ os[:name], os[:release] ]
+          when "windows"
             vm.provision :shell, :path => 'scripts/windows.ps1'
           end
           vm.provision :puppet do |puppet|
             if os[:family] == "windows"
               puppet.environment_path = "puppet/environments.windows"
             else
+              puppet.binary_path = "/opt/puppetlabs/bin"
               puppet.environment_path = "puppet/environments"
             end
             puppet.hiera_config_path = "puppet/hiera.yaml"
