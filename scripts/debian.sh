@@ -11,9 +11,9 @@ wget -q -O - http://apt.puppet.com/DEB-GPG-KEY-puppet 2>/dev/null | apt-key add 
 
 echo "Adding repository for Puppet..."
 if ! $(dpkg-query --show puppet5-release &>/dev/null); then
-  wget -q "https://apt.puppet.com/puppet5-release-${RELEASE}.deb" 2>/dev/null || raise_error
-  dpkg -i "puppet5-release-${RELEASE}.deb" &>/dev/null || raise_error
-  rm -f "puppet5-release-${RELEASE}.deb" 2>/dev/null
+  wget -q "https://apt.puppet.com/puppet6-release-${RELEASE}.deb" 2>/dev/null || raise_error
+  dpkg -i "puppet6-release-${RELEASE}.deb" &>/dev/null || raise_error
+  rm -f "puppet6-release-${RELEASE}.deb" 2>/dev/null
 fi
 
 echo "Updating repository catalog..."

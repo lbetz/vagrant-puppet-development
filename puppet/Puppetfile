@@ -20,3 +20,10 @@ mod 'example42/network'
 
 mod 'puppet/gitlab'
 mod 'puppet/r10k'
+
+#moduledir 'modules/profile'
+
+mod 'profile',
+  :git => 'https://github.com/icinga/puppet-icinga2'
+mod 'profile',
+  :git => 'https://github.com/icinga/puppet-icingaweb2'

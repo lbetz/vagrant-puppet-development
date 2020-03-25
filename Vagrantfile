@@ -44,6 +44,7 @@ ConfigValues = YAML.load_file(File.dirname(File.expand_path(__FILE__)) + "/confi
 
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vbguest.auto_update = false if Vagrant.has_plugin?("vagrant-vbguest")
 
   ConfigValues['machines'].each_pair do |name, options|
     # defaults

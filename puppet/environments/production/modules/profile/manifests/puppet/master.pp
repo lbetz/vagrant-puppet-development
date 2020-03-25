@@ -1,7 +1,7 @@
 class profile::puppet::master {
 
   #
-  # Postgresql 9.4 from PuppetDB
+  # Postgresql 9.6 from PuppetDB
   #
 
   class { 'puppetdb::database::postgresql':

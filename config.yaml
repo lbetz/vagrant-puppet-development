@@ -6,12 +6,20 @@ machines:
   puppet:
     :os: Centos7
     :cpu: 2
-    :memory: 1024
+    :memory: 2048
     :net:
       localdomain:
         :ip: 192.168.5.2
     :shared:
-      '~/puppetcode': /etc/puppetlabs/code/environments/production
+      '~/puppetcode/development': /root/puppetcode
+  ruby:
+    :os: Debian10
+    :net:
+      localdomain:
+        :ip: 192.168.5.10
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+      '~/rubycode': /root/rubycode
 
   centos6:
     :os: Centos6
@@ -19,51 +27,95 @@ machines:
       localdomain:
         :ip: 192.168.5.11
     :shared:
-      '~/puppetcode': /etc/puppetlabs/code/environments/production
+      '~/puppetcode/development': /root/puppetcode
   centos7:
     :os: Centos7
     :net:
       localdomain:
         :ip: 192.168.5.12
     :shared:
-      '~/puppetcode': /etc/puppetlabs/code/environments/production
+      '~/puppetcode/development': /root/puppetcode
+      '~/Nextcloud': /root/nextcloud
     :forwarded:
       '80': '8080'
+  centos8:
+    :os: Centos8
+    :net:
+      localdomain:
+        :ip: 192.168.5.13
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+      '~/Nextcloud': /root/nextcloud
   debian8:
     :os: Debian8
     :net:
       localdomain:
         :ip: 192.168.5.21
     :shared:
-      '~/puppetcode': /etc/puppetlabs/code/environments/production
+      '~/puppetcode/development': /root/puppetcode
   debian9:
     :os: Debian9
     :net:
       localdomain:
         :ip: 192.168.5.22
     :shared:
-      '~/puppetcode': /etc/puppetlabs/code/environments/production
+      '~/puppetcode/development': /root/puppetcode
+  debian10:
+    :os: Debian10
+    :net:
+      localdomain:
+        :ip: 192.168.5.23
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
   ubuntu16:
     :os: Ubuntu16
     :net:
       localdomain:
         :ip: 192.168.5.31
     :shared:
-      '~/puppetcode': /etc/puppetlabs/code/environments/production
+      '~/puppetcode/development': /root/puppetcode
   ubuntu18:
     :os: Ubuntu18
     :net:
       localdomain:
         :ip: 192.168.5.32
     :shared:
-      '~/puppetcode': /etc/puppetlabs/code/environments/production
+      '~/puppetcode/development': /root/puppetcode
+  ubuntu19:
+    :os: Ubuntu19
+    :net:
+      localdomain:
+        :ip: 192.168.5.33
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
   suse12:
     :os: Suse12
     :net:
       localdomain:
         :ip: 192.168.5.41
     :shared:
-      '~/puppetcode': /etc/puppetlabs/code/environments/production
+      '~/puppetcode/development': /root/puppetcode
+  fedora29:
+    :os: Fedora29
+    :net:
+      localdomain:
+        :ip: 192.168.5.61
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+  fedora30:
+    :os: Fedora30
+    :net:
+      localdomain:
+        :ip: 192.168.5.62
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+  fedora31:
+    :os: Fedora31
+    :net:
+      localdomain:
+        :ip: 192.168.5.63
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
 
   w2k12r2:
     :os: Windows2012r2
@@ -72,6 +124,10 @@ machines:
     :net:
       localdomain:
         :ip: 192.168.5.51
+    :forwarded:
+      '3389': '53389'
+    :shared:
+      '~/puppetcode/development': C:/puppetcode
   w2k16:
     :os: Windows2016
     :cpu: 2
@@ -79,8 +135,8 @@ machines:
     :net:
       localdomain:
         :ip: 192.168.5.52
-    :forwarded:
-      '3389': '53389'
+    :shared:
+      '~/puppetcode/development': C:/puppetcode
   w10:
     :os: Windows10
     :memory: 1024
@@ -88,7 +144,7 @@ machines:
       localdomain:
         :ip: 192.168.5.53
     :shared:
-      '~/puppetcode': C:/puppetcode
+      '~/puppetcode/development': C:/puppetcode
 
 operatingsystems:
   Centos6:
@@ -101,6 +157,41 @@ operatingsystems:
     :name: centos
     :release: 7
     :box: bento/centos-7
+  Centos8:
+    :family: redhat
+    :name: centos
+    :release: 8
+    :box: bento/centos-8
+  Fedora26:
+    :family: redhat
+    :name: fedora
+    :release: 26
+    :box: bento/fedora-26
+  Fedora27:
+    :family: redhat
+    :name: fedora
+    :release: 27
+    :box: bento/fedora-27
+  Fedora28:
+    :family: redhat
+    :name: fedora
+    :release: 28
+    :box: bento/fedora-28
+  Fedora29:
+    :family: redhat
+    :name: fedora
+    :release: 29
+    :box: bento/fedora-29
+  Fedora30:
+    :family: redhat
+    :name: fedora
+    :release: 30
+    :box: bento/fedora-30
+  Fedora31:
+    :family: redhat
+    :name: fedora
+    :release: 31
+    :box: bento/fedora-31
   Debian8:
     :family: debian
     :name: debian
@@ -111,6 +202,11 @@ operatingsystems:
     :name: debian
     :release: stretch
     :box: bento/debian-9
+  Debian10:
+    :family: debian
+    :name: debian
+    :release: buster
+    :box: bento/debian-10
   Ubuntu16:
     :family: debian
     :name: ubuntu
@@ -121,9 +217,14 @@ operatingsystems:
     :name: ubuntu
     :release: bionic
     :box: bento/ubuntu-18.04
+  Ubuntu19:
+    :family: debian
+    :name: ubuntu
+    :release: disco
+    :box: bento/ubuntu-19.04
   Suse12:
     :family: suse
-    :name: suse
+    :name: opensuse
     :release: 12
     :box: bento/opensuse-leap-42
   Windows2012r2:
