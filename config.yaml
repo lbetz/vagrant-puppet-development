@@ -28,6 +28,7 @@ machines:
         :ip: 192.168.5.11
     :shared:
       '~/puppetcode/development': /root/puppetcode
+      '~/Nextcloud': /root/nextcloud
   centos7:
     :os: Centos7
     :net:
