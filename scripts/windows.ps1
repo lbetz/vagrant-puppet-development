@@ -2,7 +2,9 @@
 # from the master's pe_repo by downloading it to C:\tmp first and then running
 # msiexec on it from there.
 
-$msi_source = "https://downloads.puppetlabs.com/windows/puppet5/puppet-agent-x64-latest.msi"
+[Net.ServicePointManager]::SecurityProtocol = "tls12"
+
+$msi_source = "https://downloads.puppetlabs.com/windows/puppet6/puppet-agent-x64-latest.msi"
 $msi_dest = "C:\tmp\puppet-agent-x64-latest.msi"
 
 # Start the agent installation process and wait for it to end before continuing.
@@ -26,3 +28,8 @@ $msiexec_path = "C:\Windows\System32\msiexec.exe"
 $msiexec_args = "/qn /i $msi_dest"
 $msiexec_proc = [System.Diagnostics.Process]::Start($msiexec_path, $msiexec_args)
 $msiexec_proc.WaitForExit()
+
+Write-Host "Installing Package Manager Chocolatey from https://chocolatey.org/install.ps1"
+
+Get-WebPage -url "https://chocolatey.org/install.ps1" -file "c:\tmp\install.ps1" -force
+& 'C:\tmp\install.ps1'

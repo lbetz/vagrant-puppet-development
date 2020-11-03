@@ -19,7 +19,7 @@ module Vagrant
           when "suse"
             vm.provision :shell, :path => 'scripts/suse.sh', :args => [ os[:name], os[:release] ]
           when "windows"
-            vm.provision :shell, :path => 'scripts/windows.ps1'
+            vm.provision :shell, :path => 'scripts/windows.ps1' 
           end
           vm.provision :puppet do |puppet|
             if os[:family] == "windows"
@@ -62,13 +62,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.define name do |node|
       # base boxes
-      config.vm.box = options[:os][:box]
+      node.vm.box = options[:os][:box]
       if options[:os][:family] == "windows"
-        config.vm.communicator = "winrm"
-        config.ssh.insert_key = true
+        node.vm.communicator = "winrm"
+        node.ssh.insert_key = true
       else
-        config.ssh.forward_agent = true
-        config.ssh.insert_key = true
+        node.ssh.forward_agent = true
+        node.ssh.insert_key = true
       end
 
       node.vm.hostname = name
@@ -92,8 +92,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.provider :parallels do |prl, override|
         prl.name = name
         prl.linked_clone = true
-        prl.check_guest_tools = false
-        prl.update_guest_tools = false
+        prl.check_guest_tools = true
+        prl.update_guest_tools = true if options[:os][:family] == "windows"
 
         i=0 # create internal network intrfaces
         prl_customize = []
@@ -119,17 +119,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         i=1 # create internal network interfaces
         vb_customize = []
         options[:net].each_pair do |nic, attrs| i=i+1
-          vb_customize.concat([ "--nic#{i}", "intnet", "--intnet#{i}", nic ])
+          vb_customize.concat([ "--nic#{i}", "intnet", "--intnet#{i}", nic ]) if ConfigValues['networks'][nic][:type] == 'internal'
           vb_customize.concat([ "--macaddress#{i}", "#{attrs[:mac]}" ]) if attrs[:mac]
           if attrs[:ip]
-            override.vm.network :private_network, :adapter => i, ip: attrs[:ip], virtualbox__intnet: nic
+            override.vm.network :private_network, :adapter => i, ip: attrs[:ip]
+            override.vm.network :private_network, :adapter => i, ip: attrs[:ip], virtualbox__intnet: nic if ConfigValues['networks'][nic][:type] == 'internal'
           else
-            override.vm.network :private_network, :adapter => i, type: "dhcp", virtualbox__intnet: nic
+            override.vm.network :private_network, :adapter => i, type: "dhcp"
+            override.vm.network :private_network, :adapter => i, type: "dhcp", virtualbox__intnet: nic if ConfigValues['networks'][nic][:type] == 'internal'
           end
         end
 
         vb.customize ["modifyvm", :id,
-          "--groups", "/Development/" + options[:os][:name],
+          "--groups", "/Training/Icinga 2 Fundamentals",
           "--audio", "none",
           "--usb", "on",
           "--usbehci", "off",

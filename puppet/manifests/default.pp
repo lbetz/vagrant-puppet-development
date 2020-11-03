@@ -1,43 +1,8 @@
-node 'puppet.localdomain' {
-
-  host { 'puppet.localdomain':
-    ip           => '192.168.5.2',
-    host_aliases => 'puppet',
-  }
-
-  host { 'katello.localdomain':
-    ip           => '192.168.5.3',
-    host_aliases => 'katello',
-  }
-
-  unless $::operatingsystem in ['redhat', 'centos'] and Integer($::operatingsystemmajrelease) >= 6 {
-    fail("'Your plattform ${::operatingsystem} is not supported.'")
-  }
-
-  yumrepo { 'puppet5':
-    baseurl  => "http://yum.puppet.com/puppet5/el/${::operatingsystemmajrelease}/\$basearch",
-    descr    => 'Puppet 5 Repository el 7 - $basearch',
-    enabled  => 1,
-    gpgcheck => 1,
-    gpgkey   => 'http://yum.puppet.com/RPM-GPG-KEY-puppet',
-  }
-
-  Yumrepo['puppet5'] -> Package<||>
-
-  include ::profile::puppet::master
-}
-
-
 node default {
 
-  host { 'puppet.localdomain':
-    ip           => '192.168.5.2',
-    host_aliases => 'puppet',
-  }
-
-  host { 'katello.localdomain':
-    ip           => '192.168.5.3',
-    host_aliases => 'katello',
+  host { 'nps-puppet.novalocal':
+    ip           => '10.77.16.161',
+    host_aliases => 'nps-puppet',
   }
 
   case $::operatingsystem {

@@ -1,21 +1,12 @@
 ---
 networks:
-  localdomain:
+  lbetz.localdomain:
     :address: 192.168.5.0
 machines:
-  puppet:
-    :os: Centos7
-    :cpu: 2
-    :memory: 2048
-    :net:
-      localdomain:
-        :ip: 192.168.5.2
-    :shared:
-      '~/puppetcode/development': /root/puppetcode
   ruby:
     :os: Debian10
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.10
     :shared:
       '~/puppetcode/development': /root/puppetcode
@@ -24,118 +15,124 @@ machines:
   centos6:
     :os: Centos6
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.11
     :shared:
       '~/puppetcode/development': /root/puppetcode
-      '~/Nextcloud': /root/nextcloud
   centos7:
     :os: Centos7
-    :cpu: 2
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.12
     :shared:
       '~/puppetcode/development': /root/puppetcode
-      '~/Nextcloud': /root/nextcloud
-    :forwarded:
-      '80': '8080'
+      '~/puppetcode/icinga-installer': /root/icinga-installer
   centos8:
     :os: Centos8
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.13
     :shared:
       '~/puppetcode/development': /root/puppetcode
-      '~/Nextcloud': /root/nextcloud
+  installer:
+    :os: Centos8
+    :net:
+      lbetz.localdomain:
+        :ip: 192.168.5.14
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+      '~/puppetcode/icinga-installer': /root/icinga-installer
   debian8:
     :os: Debian8
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.21
     :shared:
       '~/puppetcode/development': /root/puppetcode
   debian9:
     :os: Debian9
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.22
     :shared:
       '~/puppetcode/development': /root/puppetcode
   debian10:
     :os: Debian10
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.23
     :shared:
       '~/puppetcode/development': /root/puppetcode
+      '~/puppetcode/icinga-installer': /root/icinga-installer
   ubuntu16:
     :os: Ubuntu16
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.31
     :shared:
       '~/puppetcode/development': /root/puppetcode
   ubuntu18:
     :os: Ubuntu18
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.32
     :shared:
       '~/puppetcode/development': /root/puppetcode
   ubuntu20:
     :os: Ubuntu20
+    :cpu: 2
+    :memory: 2048
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.33
     :shared:
       '~/puppetcode/development': /root/puppetcode
   suse12:
     :os: Suse12
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.41
     :shared:
       '~/puppetcode/development': /root/puppetcode
   suse15:
     :os: Suse15
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.42
     :shared:
       '~/puppetcode/development': /root/puppetcode
   fedora29:
     :os: Fedora29
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.61
     :shared:
       '~/puppetcode/development': /root/puppetcode
   fedora30:
     :os: Fedora30
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.62
     :shared:
       '~/puppetcode/development': /root/puppetcode
   fedora31:
     :os: Fedora31
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.63
     :shared:
       '~/puppetcode/development': /root/puppetcode
   oracle7:
     :os: Oracle7
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.72
     :shared:
       '~/puppetcode/development': /root/puppetcode
   scientific7:
     :os: Scientific7
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.82
     :shared:
       '~/puppetcode/development': /root/puppetcode
@@ -145,10 +142,8 @@ machines:
     :cpu: 2
     :memory: 2048
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.51
-    :forwarded:
-      '3389': '53389'
     :shared:
       '~/puppetcode/development': C:/puppetcode
   w2k16:
@@ -156,17 +151,24 @@ machines:
     :cpu: 2
     :memory: 2048
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.52
     :shared:
       '~/puppetcode/development': C:/puppetcode
-    :forwarded:
-      '3389': '33389'
+  w2k19:
+    :os: Windows2019
+    :cpu: 2
+    :memory: 2048
+    :net:
+      lbetz.localdomain:
+        :ip: 192.168.5.53
+    :shared:
+      '~/puppetcode/development': C:/puppetcode
   w10:
     :os: Windows10
     :memory: 1024
     :net:
-      localdomain:
+      lbetz.localdomain:
         :ip: 192.168.5.53
     :shared:
       '~/puppetcode/development': C:/puppetcode
@@ -271,12 +273,17 @@ operatingsystems:
     :family: windows
     :name: windows
     :release: 2012r2
-    :box: devopsgroup-io/windows_server-2012r2-standard-amd64-nocm
+    :box: tas50/windows_2012r2
   Windows2016:
     :family: windows
     :name: windows
     :release: 2016
-    :box: jacqinthebox/windowsserver2016
+    :box: tas50/windows_2016
+  Windows2019:
+    :family: windows
+    :name: windows
+    :release: 2019
+    :box: tas50/windows_2019
   Windows10:
     :family: windows
     :name: windows
