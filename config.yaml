@@ -31,6 +31,7 @@ machines:
       '~/Nextcloud': /root/nextcloud
   centos7:
     :os: Centos7
+    :cpu: 2
     :net:
       localdomain:
         :ip: 192.168.5.12
@@ -82,8 +83,8 @@ machines:
         :ip: 192.168.5.32
     :shared:
       '~/puppetcode/development': /root/puppetcode
-  ubuntu19:
-    :os: Ubuntu19
+  ubuntu20:
+    :os: Ubuntu20
     :net:
       localdomain:
         :ip: 192.168.5.33
@@ -94,6 +95,13 @@ machines:
     :net:
       localdomain:
         :ip: 192.168.5.41
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+  suse15:
+    :os: Suse15
+    :net:
+      localdomain:
+        :ip: 192.168.5.42
     :shared:
       '~/puppetcode/development': /root/puppetcode
   fedora29:
@@ -117,6 +125,20 @@ machines:
         :ip: 192.168.5.63
     :shared:
       '~/puppetcode/development': /root/puppetcode
+  oracle7:
+    :os: Oracle7
+    :net:
+      localdomain:
+        :ip: 192.168.5.72
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+  scientific7:
+    :os: Scientific7
+    :net:
+      localdomain:
+        :ip: 192.168.5.82
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
 
   w2k12r2:
     :os: Windows2012r2
@@ -138,6 +160,8 @@ machines:
         :ip: 192.168.5.52
     :shared:
       '~/puppetcode/development': C:/puppetcode
+    :forwarded:
+      '3389': '33389'
   w10:
     :os: Windows10
     :memory: 1024
@@ -163,6 +187,16 @@ operatingsystems:
     :name: centos
     :release: 8
     :box: bento/centos-8
+  Scientific7:
+    :family: redhat
+    :name: scientific
+    :release: 7
+    :box: bento/scientific-7
+  Oracle7:
+    :family: redhat
+    :name: oraclelinux
+    :release: 7
+    :box: bento/oracle-7
   Fedora26:
     :family: redhat
     :name: fedora
@@ -218,16 +252,21 @@ operatingsystems:
     :name: ubuntu
     :release: bionic
     :box: bento/ubuntu-18.04
-  Ubuntu19:
+  Ubuntu20:
     :family: debian
     :name: ubuntu
-    :release: disco
-    :box: bento/ubuntu-19.04
+    :release: focal
+    :box: bento/ubuntu-20.04
   Suse12:
     :family: suse
     :name: opensuse
     :release: 12
     :box: bento/opensuse-leap-42
+  Suse15:
+    :family: suse
+    :name: opensuse
+    :release: 15
+    :box: bento/opensuse-leap-15.1
   Windows2012r2:
     :family: windows
     :name: windows
