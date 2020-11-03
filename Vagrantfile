@@ -62,13 +62,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.define name do |node|
       # base boxes
-      config.vm.box = options[:os][:box]
+      node.vm.box = options[:os][:box]
       if options[:os][:family] == "windows"
-        config.vm.communicator = "winrm"
-        config.ssh.insert_key = true
+        node.vm.communicator = "winrm"
+        node.ssh.insert_key = true
       else
-        config.ssh.forward_agent = true
-        config.ssh.insert_key = true
+        node.ssh.forward_agent = true
+        node.ssh.insert_key = true
       end
 
       node.vm.hostname = name
