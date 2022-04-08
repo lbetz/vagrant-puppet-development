@@ -7,10 +7,10 @@ function raise_error() {
 }
 
 echo "Importing GPG key..."
-rpm --import https://yum.puppet.com/RPM-GPG-KEY-puppet 2>/dev/null || raise_error
+rpm --import https://yum.puppet.com/RPM-GPG-KEY-puppet-20250406 2>/dev/null || raise_error
 
 echo "Adding repository for Puppet..."
-rpm -aq |grep puppet5-release 1>/dev/null || zypper install -y "http://yum.puppet.com/puppet5/puppet5-release-sles-${RELEASE}.noarch.rpm" &>/dev/null || raise_error
+rpm -aq |grep puppet7-release 1>/dev/null || rpm -ivh "http://yum.puppet.com/puppet7/puppet7-release-sles-${RELEASE}.noarch.rpm" &>/dev/null || raise_error
 
 echo "Installing Puppet agent..."
 rpm -q puppet-agent &>/dev/null || zypper install -y puppet-agent &>/dev/null || raise_error

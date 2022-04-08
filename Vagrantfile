@@ -48,7 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   ConfigValues['machines'].each_pair do |name, options|
     # defaults
-    options[:memory] = 384 unless options[:memory]
+    options[:memory] = 512 unless options[:memory]
     options[:cpu] = 1 unless options[:cpu]
     options[:domain] = options[:net].keys.first unless options[:domain]
     options[:facts] = {} unless options[:facts]
@@ -69,6 +69,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       else
         node.ssh.forward_agent = true
         node.ssh.insert_key = true
+        node.vm.synced_folder ".", "/vagrant"
       end
 
       node.vm.hostname = name
@@ -105,6 +106,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             override.vm.network :private_network, ip: ConfigValues['networks'][nic][:address], type: "dhcp"
           end
         end
+#        override.vm.network "public_network", bridge: "en0"
 
         prl.customize [ "set", :id, "--device-set" ].concat(prl_customize) unless prl_customize.empty?
         prl.memory = options[:memory]

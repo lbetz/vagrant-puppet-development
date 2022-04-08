@@ -1,12 +1,12 @@
 node default {
 
   host { 'nps-puppet.novalocal':
-    ip           => '10.77.16.161',
+    ip           => '10.77.16.2',
     host_aliases => 'nps-puppet',
   }
 
   case $::operatingsystem {
-    'centos': {
+    'centos', 'redhat', 'rockylinux', 'almalinux', 'oraclelinux': {
       if $::networking['interfaces']['eth1']['dhcp'] {
         network::interface { 'eth0':
           enable_dhcp => true,
@@ -18,7 +18,7 @@ node default {
           dhcp_hostname => $::hostname,
         }
       } # dhcp (eth1)
-    } # CentOS
+    } # Enterprise Linux
 
     'fedora': {
       if $::networking['interfaces']['enp0s6']['dhcp'] {

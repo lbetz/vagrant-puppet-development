@@ -4,7 +4,7 @@
 
 [Net.ServicePointManager]::SecurityProtocol = "tls12"
 
-$msi_source = "https://downloads.puppetlabs.com/windows/puppet6/puppet-agent-x64-latest.msi"
+$msi_source = "https://downloads.puppetlabs.com/windows/puppet7/puppet-agent-x64-latest.msi"
 $msi_dest = "C:\tmp\puppet-agent-x64-latest.msi"
 
 # Start the agent installation process and wait for it to end before continuing.

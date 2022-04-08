@@ -7,13 +7,13 @@ function raise_error() {
 }
 
 echo "Importing GPG key..."
-wget -q -O - http://apt.puppet.com/DEB-GPG-KEY-puppet 2>/dev/null | apt-key add - &>/dev/null || raise_error
+wget -q -O - https://apt.puppet.com/DEB-GPG-KEY-puppet-20250406 2>/dev/null | apt-key add - &>/dev/null || raise_error
 
-echo "Adding repository for Puppet..."
-if ! $(dpkg-query --show puppet5-release &>/dev/null); then
-  wget -q "https://apt.puppet.com/puppet6-release-${RELEASE}.deb" 2>/dev/null || raise_error
-  dpkg -i "puppet6-release-${RELEASE}.deb" &>/dev/null || raise_error
-  rm -f "puppet6-release-${RELEASE}.deb" 2>/dev/null
+echo "Adding repository for Puppet 7..."
+if ! $(dpkg-query --show puppet7-release &>/dev/null); then
+  wget -q "https://apt.puppet.com/puppet7-release-${RELEASE}.deb" 2>/dev/null || raise_error
+  dpkg -i "puppet7-release-${RELEASE}.deb" &>/dev/null || raise_error
+  rm -f "puppet7-release-${RELEASE}.deb" 2>/dev/null
 fi
 
 echo "Updating repository catalog..."

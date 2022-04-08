@@ -12,13 +12,6 @@ machines:
       '~/puppetcode/development': /root/puppetcode
       '~/rubycode': /root/rubycode
 
-  centos6:
-    :os: Centos6
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.11
-    :shared:
-      '~/puppetcode/development': /root/puppetcode
   centos7:
     :os: Centos7
     :net:
@@ -26,27 +19,43 @@ machines:
         :ip: 192.168.5.12
     :shared:
       '~/puppetcode/development': /root/puppetcode
-      '~/puppetcode/icinga-installer': /root/icinga-installer
   centos8:
     :os: Centos8
+    :memory: 1024
+    :cpu: 2
     :net:
       lbetz.localdomain:
         :ip: 192.168.5.13
     :shared:
       '~/puppetcode/development': /root/puppetcode
-  installer:
-    :os: Centos8
+      '~/puppetcode/icinga-installer': /root/icinga-installer
+  alma8:
+    :os: AlmaLinux8
+    :memory: 1024
     :net:
       lbetz.localdomain:
         :ip: 192.168.5.14
     :shared:
       '~/puppetcode/development': /root/puppetcode
-      '~/puppetcode/icinga-installer': /root/icinga-installer
-  debian8:
-    :os: Debian8
+  rocky8:
+    :os: RockyLinux8
     :net:
       lbetz.localdomain:
-        :ip: 192.168.5.21
+        :ip: 192.168.5.15
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+  rhel8:
+    :os: RedHat8
+    :net:
+      lbetz.localdomain:
+        :ip: 192.168.5.16
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+  oracle8:
+    :os: Oracle8
+    :net:
+      lbetz.localdomain:
+        :ip: 192.168.5.17
     :shared:
       '~/puppetcode/development': /root/puppetcode
   debian9:
@@ -63,14 +72,15 @@ machines:
         :ip: 192.168.5.23
     :shared:
       '~/puppetcode/development': /root/puppetcode
-      '~/puppetcode/icinga-installer': /root/icinga-installer
-  ubuntu16:
-    :os: Ubuntu16
+  debian11:
+    :os: Debian11
+    :memory: 1024
+    :cpu: 2
     :net:
       lbetz.localdomain:
-        :ip: 192.168.5.31
+        :ip: 192.168.5.24
     :shared:
-      '~/puppetcode/development': /root/puppetcode
+      '~/puppetcode/control': /root/puppetcode
   ubuntu18:
     :os: Ubuntu18
     :net:
@@ -87,13 +97,6 @@ machines:
         :ip: 192.168.5.33
     :shared:
       '~/puppetcode/development': /root/puppetcode
-  suse12:
-    :os: Suse12
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.41
-    :shared:
-      '~/puppetcode/development': /root/puppetcode
   suse15:
     :os: Suse15
     :net:
@@ -101,55 +104,10 @@ machines:
         :ip: 192.168.5.42
     :shared:
       '~/puppetcode/development': /root/puppetcode
-  fedora29:
-    :os: Fedora29
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.61
-    :shared:
-      '~/puppetcode/development': /root/puppetcode
-  fedora30:
-    :os: Fedora30
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.62
-    :shared:
-      '~/puppetcode/development': /root/puppetcode
-  fedora31:
-    :os: Fedora31
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.63
-    :shared:
-      '~/puppetcode/development': /root/puppetcode
-  oracle7:
-    :os: Oracle7
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.72
-    :shared:
-      '~/puppetcode/development': /root/puppetcode
-  scientific7:
-    :os: Scientific7
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.82
-    :shared:
-      '~/puppetcode/development': /root/puppetcode
-
-  w2k12r2:
-    :os: Windows2012r2
-    :cpu: 2
-    :memory: 2048
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.51
-    :shared:
-      '~/puppetcode/development': C:/puppetcode
   w2k16:
     :os: Windows2016
     :cpu: 2
-    :memory: 2048
+    :memory: 4096
     :net:
       lbetz.localdomain:
         :ip: 192.168.5.52
@@ -164,16 +122,13 @@ machines:
         :ip: 192.168.5.53
     :shared:
       '~/puppetcode/development': C:/puppetcode
-  w10:
-    :os: Windows10
-    :memory: 1024
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.53
-    :shared:
-      '~/puppetcode/development': C:/puppetcode
 
 operatingsystems:
+  RedHat8:
+    :family: redhat
+    :name: redhat
+    :release: 8
+    :box: generic/rhel8
   Centos6:
     :family: redhat
     :name: centos
@@ -188,7 +143,17 @@ operatingsystems:
     :family: redhat
     :name: centos
     :release: 8
-    :box: bento/centos-8
+    :box: bento/centos-stream-8
+  AlmaLinux8:
+    :family: redhat
+    :name: almalinux
+    :release: 8
+    :box: bento/almalinux-8
+  RockyLinux8:
+    :family: redhat
+    :name: rockylinux
+    :release: 8
+    :box: bento/rockylinux-8
   Scientific7:
     :family: redhat
     :name: scientific
@@ -199,6 +164,11 @@ operatingsystems:
     :name: oraclelinux
     :release: 7
     :box: bento/oracle-7
+  Oracle8:
+    :family: redhat
+    :name: oraclelinux
+    :release: 8
+    :box: bento/oracle-8
   Fedora26:
     :family: redhat
     :name: fedora
@@ -244,6 +214,11 @@ operatingsystems:
     :name: debian
     :release: buster
     :box: bento/debian-10
+  Debian11:
+    :family: debian
+    :name: debian
+    :release: bullseye
+    :box: bento/debian-11
   Ubuntu16:
     :family: debian
     :name: ubuntu
@@ -269,11 +244,6 @@ operatingsystems:
     :name: opensuse
     :release: 15
     :box: bento/opensuse-leap-15.1
-  Windows2012r2:
-    :family: windows
-    :name: windows
-    :release: 2012r2
-    :box: tas50/windows_2012r2
   Windows2016:
     :family: windows
     :name: windows
@@ -284,8 +254,3 @@ operatingsystems:
     :name: windows
     :release: 2019
     :box: tas50/windows_2019
-  Windows10:
-    :family: windows
-    :name: windows
-    :release: 10
-    :box: jacqinthebox/windows10LTSB
