@@ -5,8 +5,8 @@ node default {
     host_aliases => 'nps-puppet',
   }
 
-  case $::operatingsystem {
-    'centos', 'redhat', 'rockylinux', 'almalinux', 'oraclelinux': {
+  case $::osfamily {
+    'redhat': {
       if $::networking['interfaces']['eth1']['dhcp'] {
         network::interface { 'eth0':
           enable_dhcp => true,
@@ -18,21 +18,7 @@ node default {
           dhcp_hostname => $::hostname,
         }
       } # dhcp (eth1)
-    } # Enterprise Linux
-
-    'fedora': {
-      if $::networking['interfaces']['enp0s6']['dhcp'] {
-        network::interface { 'enp0s5':
-          enable_dhcp => true,
-          peerdns     => 'no',
-        }
-
-        network::interface { 'enp0s6':
-          enable_dhcp   => true,
-          dhcp_hostname => $::hostname,
-        }
-      } # dhcp (enp0s6)
-    } # Fedora
+    }
   }
 
   if $::kernel != 'windows' and $::shared_folders {

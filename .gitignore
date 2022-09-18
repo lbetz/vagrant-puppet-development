@@ -2,3 +2,4 @@ puppet/modules
 .vagrant
 .DS_Store
 *.swp
+tmp/

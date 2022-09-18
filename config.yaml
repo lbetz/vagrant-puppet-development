@@ -21,17 +21,13 @@ machines:
       '~/puppetcode/development': /root/puppetcode
   centos8:
     :os: Centos8
-    :memory: 1024
-    :cpu: 2
     :net:
       lbetz.localdomain:
         :ip: 192.168.5.13
     :shared:
       '~/puppetcode/development': /root/puppetcode
-      '~/puppetcode/icinga-installer': /root/icinga-installer
   alma8:
     :os: AlmaLinux8
-    :memory: 1024
     :net:
       lbetz.localdomain:
         :ip: 192.168.5.14
@@ -44,14 +40,9 @@ machines:
         :ip: 192.168.5.15
     :shared:
       '~/puppetcode/development': /root/puppetcode
-  rhel8:
-    :os: RedHat8
-    :net:
-      lbetz.localdomain:
-        :ip: 192.168.5.16
-    :shared:
-      '~/puppetcode/development': /root/puppetcode
   oracle8:
+    :memory: 2048
+    :cpu: 2
     :os: Oracle8
     :net:
       lbetz.localdomain:
@@ -75,12 +66,11 @@ machines:
   debian11:
     :os: Debian11
     :memory: 1024
-    :cpu: 2
     :net:
       lbetz.localdomain:
         :ip: 192.168.5.24
     :shared:
-      '~/puppetcode/control': /root/puppetcode
+      '~/puppetcode/development': /root/puppetcode
   ubuntu18:
     :os: Ubuntu18
     :net:
@@ -90,11 +80,18 @@ machines:
       '~/puppetcode/development': /root/puppetcode
   ubuntu20:
     :os: Ubuntu20
-    :cpu: 2
-    :memory: 2048
+    :memory: 4096
     :net:
       lbetz.localdomain:
         :ip: 192.168.5.33
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
+  ubuntu22:
+    :os: Ubuntu22
+    :memory: 1024
+    :net:
+      lbetz.localdomain:
+        :ip: 192.168.5.34
     :shared:
       '~/puppetcode/development': /root/puppetcode
   suse15:
@@ -122,6 +119,13 @@ machines:
         :ip: 192.168.5.53
     :shared:
       '~/puppetcode/development': C:/puppetcode
+  fedora32:
+    :os: Fedora32
+    :net:
+      lbetz.localdomain:
+        :ip: 192.168.5.62
+    :shared:
+      '~/puppetcode/development': /root/puppetcode
 
 operatingsystems:
   RedHat8:
@@ -149,11 +153,21 @@ operatingsystems:
     :name: almalinux
     :release: 8
     :box: bento/almalinux-8
+  AlmaLinux9:
+    :family: redhat
+    :name: almalinux
+    :release: 9
+    :box: bento/almalinux-9
   RockyLinux8:
     :family: redhat
     :name: rockylinux
     :release: 8
     :box: bento/rockylinux-8
+  RockyLinux9:
+    :family: redhat
+    :name: rockylinux
+    :release: 9
+    :box: bento/rockylinux-9
   Scientific7:
     :family: redhat
     :name: scientific
@@ -169,36 +183,21 @@ operatingsystems:
     :name: oraclelinux
     :release: 8
     :box: bento/oracle-8
-  Fedora26:
+  Fedora34:
     :family: redhat
     :name: fedora
-    :release: 26
-    :box: bento/fedora-26
-  Fedora27:
+    :release: 34
+    :box: bento/fedora-34
+  Fedora33:
     :family: redhat
     :name: fedora
-    :release: 27
-    :box: bento/fedora-27
-  Fedora28:
+    :release: 33
+    :box: bento/fedora-33
+  Fedora32:
     :family: redhat
     :name: fedora
-    :release: 28
-    :box: bento/fedora-28
-  Fedora29:
-    :family: redhat
-    :name: fedora
-    :release: 29
-    :box: bento/fedora-29
-  Fedora30:
-    :family: redhat
-    :name: fedora
-    :release: 30
-    :box: bento/fedora-30
-  Fedora31:
-    :family: redhat
-    :name: fedora
-    :release: 31
-    :box: bento/fedora-31
+    :release: 32
+    :box: bento/fedora-32
   Debian8:
     :family: debian
     :name: debian
@@ -234,6 +233,11 @@ operatingsystems:
     :name: ubuntu
     :release: focal
     :box: bento/ubuntu-20.04
+  Ubuntu22:
+    :family: debian
+    :name: ubuntu
+    :release: jammy
+    :box: bento/ubuntu-22.04
   Suse12:
     :family: suse
     :name: opensuse
@@ -243,7 +247,7 @@ operatingsystems:
     :family: suse
     :name: opensuse
     :release: 15
-    :box: bento/opensuse-leap-15.1
+    :box: bento/opensuse-leap-15.3
   Windows2016:
     :family: windows
     :name: windows
